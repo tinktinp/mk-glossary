@@ -46,6 +46,7 @@ Each animation frame is itself a list of images that are to be composed together
 Each image contains a width, height, x and y offsets, a pointer to the image data itself (which in the arcade is in bits and not bytes), a DMA control word (except in MK1), and sometimes a pointer to the palette.
 
 #### Anthony Marquez
+Also called Tony Marquez.
 Played Kung Lao.
 
 #### ASK_MR_DIFF
@@ -547,7 +548,7 @@ Mame has an emulator for this CPU, see https://github.com/mamedev/mame/blob/mast
 
 
 #### TM
-"The Monk". Kung Lao in MKII.
+"Tony Marquez". Kung Lao in MKII.
 
 For example, the file `HATHED1.IMG` contains a sprite named `TMSTANCE1`.
 
