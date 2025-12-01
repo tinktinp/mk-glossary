@@ -139,7 +139,7 @@ A dead body. In endurance matches, a "corpse" is the defeated first fighter that
 
 #### CRT
 
-[Cathode-ray tube]{https://en.wikipedia.org/wiki/Cathode_ray_tube). The technology
+[Cathode-ray tube](https://en.wikipedia.org/wiki/Cathode_ray_tube). The technology
 used for TV screens from the 1930s until the late 2000s. Very heavy. As deep as they are wide adn tall.
 
 They are relevant today because:
@@ -209,7 +209,21 @@ Liu Kang in MK3.
 In MK2 we learn that Shao Khan is the ruler of Outworld. 
 
 But in MK1, the game's assets use `EMP` and `EMPEROR` to refer to Shang Tsung.
+Many sprites also use the prefix `YT`, with a palette named `YANG_P`.
+There are also palettes named `EMP_P` and `EMP_FROZE_P`.
 
+#### Endian
+The order of the bytes. "Byte order".
+
+See https://en.wikipedia.org/wiki/Endianness
+
+In IMG files, little endian encoding is used. So if a sprite were 132 pixels tall (0x84 in hex), its height would be encoded as `84 00`, and if one were 10,000 pixels tall (0x2710 in hex), it would be encoded as `10 27`.  (When viewed in a hex editor.)
+
+The Nintendo 64 uses big endian, so if the same fields were encoded for that platform, they would look like `00 84` and `27 10` in a hex editor.
+
+Why groups of two digits? Each hex digit is only half a byte (called a "[nybble](https://en.wikipedia.org/wiki/Nibble)"), which means you need two of them to make a whole byte. That's why when you change the order of the bytes, you'll see the hex digits swap around in groups of two digits. 
+
+The size of the field matters too. If we were writing 32 bit (4 byte) fields, we'd have either LE `84 00 00 00` or BE ``00 00 00 84`;
 
 ### F
 #### FAT
@@ -218,7 +232,7 @@ Fatality.
 #### FEMGORO
 Female Goro, Sheeva.
 
-#### FN
+#### FN, FNINJA
 Female Ninja.
 Kitana, Mileena, Jade, and Khameleon.
 
@@ -468,6 +482,12 @@ Another complication is that your palette is often 64, 32, sometimes even 16 col
 #### RD
 Raiden.
 
+#### Robo
+Robot, Roboninja. Refers to the palette swapped cyber ninjas, Cyrax, Sektor, and Smoke.
+
+Sektor (Ketchup) is usually RB or RB1, with Cyrax (Mustard) being RB2 or ROBO2, and Smoke RB3 or ROBO3.
+
+
 #### RP
 Reptile.
 
@@ -478,6 +498,12 @@ Reptile.
 #### Sal Divita
 Played Nightwolf, Sektor, Cyrax, Smoke in MK3.
 
+#### Sans
+[Without](https://en.wiktionary.org/wiki/sans).
+
+Sans power is without power.
+
+A "sans-serif" font is "without serifs". (Serifs are the extra tiny lines you find on serif fonts such as Times, but don't see on sans-serif fonts like Arial.)
 
 #### SB
 Sonya Blade.
@@ -560,6 +586,22 @@ Time Since Last.
 
 Example: `get_tsl` returns the amount of time, in ticks, since the last time the variable in register `a0` was updated.
 
+#### Two's complment
+See https://en.wikipedia.org/wiki/Two%27s_complement
+
+It is how negative numbers are stored. Usually.
+
+It means that `-1` is stored as `0xFF`. In binary that is `0b 1111_1111`.
+
+This is useful to know if you are looking at an unknown file in a hex editor. If a field is signed, then `-1` is a common value to use for "N/A" or "not set". 
+
+For example, sprites are often stored as width, height, and x and y offsets, and usually all four of these are each in two byte fields.
+
+Animation offsets are usually small signed numbers, and it's helpful to know that `FF FD` can also mean `-3`.
+
+Neither negative three nor 65,535 (0xFFFD in decimal) are going to be valid sprite widths or heights in a 90s arcade game. But negative three might be a valid x or y animation offset.
+
+
 ### U
 #### UG, UGMO
 "Ugly Guy". Refers to Baraka.
@@ -589,4 +631,21 @@ Related to background scrolling and parallax.
 X velocity. How fast a sprite is moving in the X direction (left to right).
 
 ### Y
+#### Yang Tsung
+
+Yang Tsung is assumed to be an earlier name for Shang Tsung.
+
+This was discovered on November 29th, 2025 by Tim, leanycat and others on Discord.
+
+(That the PC versions contain debugging symbols has been known by the community for quite some time, so it is possible this has been noticed before, but I couldn't find any record of it.)
+
+While going through the list of symbols in the PC (DOS) version of MK1 it was noticed that Shang Tsung's animation frames didn't seem to have symbols. On closer inspection, the symbols were located, but with the prefix `YT`. (As opposed to `EMP`, which is what other Shang Tsung related symbols use.) But none of us could figure out what `YT` might stand for.
+
+At first, Yang Tsung was mentioned as a joke.
+
+But then we noticed that `YTSTANC1` uses a palette named `YANG_P`. (Palettes often end with `_P`.)
+
+#### YT
+See *Yang Tsung*.
+
 ### Z
